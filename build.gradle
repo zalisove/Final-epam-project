@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.10.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+    implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
+    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '5.0.0'
+    compileOnly group: 'jakarta.servlet.jsp', name: 'jakarta.servlet.jsp-api', version: '3.0.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
+}
+
+test {
+    useJUnitPlatform()
+}

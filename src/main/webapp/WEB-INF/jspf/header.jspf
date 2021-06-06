@@ -1,0 +1,94 @@
+<%@ page import="com.zalisove.Path" %>
+<%@ page import="com.zalisove.db.Role" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<fmt:setLocale
+        value="${not empty sessionScope.defaultLocale
+        ? sessionScope.defaultLocale
+        : applicationScope.locales.get(0)}"
+/>
+<fmt:setBundle basename="massage"/>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+        <div class="d-flex">
+            <a class="navbar-brand" href="<c:url value="${Path.COMMAND__START_PAGE}"/>">
+                TestOnline
+            </a>
+            <form action="controller" class="m-0 p-0 ">
+                <input hidden name="command" value="${Path.COMMAND___SET_LOCALE}">
+                <select class="form-select bg-light border-0 text-uppercase text-white bg-dark h-100" name="localeToSet" onchange="getValueSelect()">
+
+                    <c:forEach var="localeName" items="${applicationScope.locales}">
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.defaultLocale && localeName.equals(sessionScope.defaultLocale)}">
+                                <option value="" selected>${sessionScope.defaultLocale}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${localeName}">${localeName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                <button id="localeSubmit" type="submit" hidden/>
+            </form>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <c:if test="${not empty sessionScope.user}">
+                <c:if test="${Role.getRole(sessionScope.user).equals(Role.ADMIN)}">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page"
+                       href="<c:url value='${Path.COMMAND__CREATE_TEST_PAGE}'/>"><fmt:message
+                            key="header_jspf.create_test"/></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value='${Path.COMMAND___ADMIN_USER_PAGE}'/>"><fmt:message
+                            key="header_jspf.user"/></a>
+                </li>
+            </ul>
+
+            </c:if>
+            <c:if test="${Role.getRole(sessionScope.user).equals(Role.CLIENT)}">
+                </ul>
+
+            </c:if>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        ${sessionScope.user.email}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="<c:url value='${Path.COMMAND___USER_PAGE}'/>"><fmt:message
+                            key="header_jspf.dropdown.your_page"/></a></li>
+                    <li><a class="dropdown-item bg-danger"
+                           href="<c:url value='${Path.COMMAND___SIGN_OUT}'/>"><fmt:message
+                            key="header_jspf.dropdown.sign_out"/></a></li>
+                </ul>
+            </div>
+            </c:if>
+            <c:if test="${empty sessionScope.user}">
+                </ul>
+                <div>
+                    <a type="button" class="btn btn-secondary" href="<c:url value='${Path.COMMAND__LOGIN_PAGE}'/>">
+                        <fmt:message key="header_jspf.login"/>
+                    </a>
+                    <a type="button" class="btn btn-secondary"
+                       href="<c:url value='${Path.COMMAND__REGISTRATION_PAGE}'/>">
+                        <fmt:message key="header_jspf.registration"/>
+                    </a>
+                </div>
+            </c:if>
+
+        </div>
+    </div>
+</nav>
+
+
+
+

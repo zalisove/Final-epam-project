@@ -1,0 +1,17 @@
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css' />"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css' />"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src= "<c:url value='/js/bootstrap.bundle.min.js' />"></script>
+    <script src= "<c:url value='/js/costomScript.js' />"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <meta charset="UTF-8">
+
+</head>
