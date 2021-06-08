@@ -1,12 +1,10 @@
 package com.zalisove.db.managers;
 
 import com.zalisove.db.dao.DAOFactory;
-import com.zalisove.db.dao.dao_interfases.SubjectDao;
 import com.zalisove.db.entity.Subject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +14,7 @@ import java.util.Optional;
  */
 public class SubjectManager implements CRUD<Subject,Long>{
     private static SubjectManager instance;
-    private SubjectDao subjectDao;
-    private SubjectManager() {
-        subjectDao = DAOFactory.getInstance().getSubjectDao();
-    }
+    private SubjectManager() {}
 
     public static SubjectManager getInstance() {
         if (instance == null){
@@ -40,8 +35,8 @@ public class SubjectManager implements CRUD<Subject,Long>{
     public void create(Subject entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            subjectDao.create(con,entity);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getSubjectDao().create(con,entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -62,8 +57,8 @@ public class SubjectManager implements CRUD<Subject,Long>{
         Optional<Subject> entity;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            entity = subjectDao.read(con,primaryKey);
+            con = DAOFactory.getInstance().getConnection();
+            entity = DAOFactory.getInstance().getSubjectDao().read(con,primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -83,8 +78,8 @@ public class SubjectManager implements CRUD<Subject,Long>{
     public void update(Subject entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            subjectDao.update(con,entity);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getSubjectDao().update(con,entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -104,8 +99,8 @@ public class SubjectManager implements CRUD<Subject,Long>{
     public void delete(Long primaryKey) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            subjectDao.delete(con,primaryKey);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getSubjectDao().delete(con,primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -124,8 +119,8 @@ public class SubjectManager implements CRUD<Subject,Long>{
         List<Subject> subjects;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            subjects = subjectDao.getAllSubject(con);
+            con = DAOFactory.getInstance().getConnection();
+            subjects = DAOFactory.getInstance().getSubjectDao().getAllSubject(con);
             DAOFactory.commitAndClose(con);
             return subjects;
         }catch (SQLException throwables){

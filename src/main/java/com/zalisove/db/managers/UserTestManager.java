@@ -1,7 +1,6 @@
 package com.zalisove.db.managers;
 
 import com.zalisove.db.dao.DAOFactory;
-import com.zalisove.db.dao.dao_interfases.UserTestDao;
 import com.zalisove.db.entity.UserTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,11 +16,8 @@ import java.sql.SQLException;
 public class UserTestManager {
 
     private static UserTestManager instance;
-    private UserTestDao userTestDao;
     private static final Logger LOG = LogManager.getLogger(UserTestManager.class);
-    private UserTestManager() {
-        userTestDao = DAOFactory.getInstance().getUserTestDao();
-    }
+    private UserTestManager() { }
 
     public static UserTestManager getInstance() {
         if (instance == null){
@@ -41,8 +37,8 @@ public class UserTestManager {
     public void create(UserTest userTest)throws ManagerException{
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            userTestDao.create(con,userTest);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getUserTestDao().create(con,userTest);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -61,8 +57,8 @@ public class UserTestManager {
     public void update(UserTest userTest)throws ManagerException{
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            userTestDao.update(con,userTest);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getUserTestDao().update(con,userTest);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -84,8 +80,8 @@ public class UserTestManager {
         Connection con = null;
         UserTest userTest;
         try {
-            con = DAOFactory.getConnection();
-            userTest = userTestDao.read(con,userId,testId).orElseThrow(()-> new ManagerException("No read user_test"));
+            con = DAOFactory.getInstance().getConnection();
+            userTest = DAOFactory.getInstance().getUserTestDao().read(con,userId,testId).orElseThrow(()-> new ManagerException("No read user_test"));
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -105,12 +101,12 @@ public class UserTestManager {
     public void createOrUpdate(UserTest userTest) throws ManagerException{
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             try {
-                userTestDao.create(con,userTest);
+                DAOFactory.getInstance().getUserTestDao().create(con,userTest);
             }catch (SQLException e){
                 LOG.info("no create trying update");
-                userTestDao.update(con,userTest);
+                DAOFactory.getInstance().getUserTestDao().update(con,userTest);
             }
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {

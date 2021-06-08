@@ -54,7 +54,7 @@ public abstract class DAOFactory {
         DAOFactory.daoFactoryFCN = daoFactoryFCN;
     }
 
-    public static synchronized Connection getConnection() throws SQLException {
+    public synchronized Connection getConnection() throws SQLException {
         if (dataSource == null) {
             try {
                 Context initContext = new InitialContext();
@@ -71,6 +71,9 @@ public abstract class DAOFactory {
     }
 
     public static void commitAndClose(Connection con) {
+        if (con == null) {
+            return;
+        }
         try {
             con.commit();
             con.close();
@@ -80,6 +83,9 @@ public abstract class DAOFactory {
     }
 
     public static void rollbackAndClose(Connection con) {
+        if (con == null) {
+            return;
+        }
         try {
             con.rollback();
             con.close();

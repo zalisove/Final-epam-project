@@ -48,7 +48,7 @@ public class TestManager implements CRUD<Test, Long> {
     public void create(Test entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             testDao.create(con, entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
@@ -71,7 +71,7 @@ public class TestManager implements CRUD<Test, Long> {
         Optional<Test> entity;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             entity = testDao.read(con, primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
@@ -93,7 +93,7 @@ public class TestManager implements CRUD<Test, Long> {
     public void update(Test entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             testDao.update(con, entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
@@ -114,7 +114,7 @@ public class TestManager implements CRUD<Test, Long> {
     public void delete(Long primaryKey) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             testDao.delete(con, primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
@@ -133,7 +133,7 @@ public class TestManager implements CRUD<Test, Long> {
         List<Test> tests;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             tests = testDao.getAllTest(con);
             DAOFactory.commitAndClose(con);
             return tests;
@@ -156,7 +156,7 @@ public class TestManager implements CRUD<Test, Long> {
         List<Test> tests;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             tests = testDao.getAllTest(con, quantity, from);
             DAOFactory.commitAndClose(con);
             return tests;
@@ -182,7 +182,7 @@ public class TestManager implements CRUD<Test, Long> {
         List<Test> tests;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             tests = testDao.getAllTest(con, subjectId, quantity, from);
             DAOFactory.commitAndClose(con);
             return tests;
@@ -209,7 +209,7 @@ public class TestManager implements CRUD<Test, Long> {
         List<Test> tests;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             tests = testDao.getAllTest(con, orderBy, quantity, from, revers);
             DAOFactory.commitAndClose(con);
             return tests;
@@ -237,7 +237,7 @@ public class TestManager implements CRUD<Test, Long> {
         List<Test> tests;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             tests = testDao.getAllTest(con, orderBy, subjectId, quantity, from, revers);
             DAOFactory.commitAndClose(con);
             return tests;
@@ -260,7 +260,7 @@ public class TestManager implements CRUD<Test, Long> {
         Connection con = null;
         Long countRecords;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             countRecords = testDao.countRecords(con);
             DAOFactory.commitAndClose(con);
             return countRecords;
@@ -284,7 +284,7 @@ public class TestManager implements CRUD<Test, Long> {
         Connection con = null;
         Long countRecords;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             countRecords = testDao.countRecords(con, subjectId);
             DAOFactory.commitAndClose(con);
             return countRecords;
@@ -311,7 +311,7 @@ public class TestManager implements CRUD<Test, Long> {
         QuestionDao questionDao = DAOFactory.getInstance().getQuestionDao();
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             List<Question> questions = questionDao.findQuestionByTestId(con, testId);
             List<SimpleQuestionAnswerBean> questionAnswerBeans = new ArrayList<>();
             for (Question question : questions) {
@@ -350,7 +350,7 @@ public class TestManager implements CRUD<Test, Long> {
         TestBean testBean = new TestBean();
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
 
             Test test = read(id).orElseThrow(() -> new ManagerException("no get Test"));
             testBean.setTest(test);
@@ -389,7 +389,7 @@ public class TestManager implements CRUD<Test, Long> {
         AnswerDao answerDao = DAOFactory.getInstance().getAnswerDao();
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             Test test = testBean.getTest();
             testDao.create(con, test);
             LOG.debug("i'm create test");
@@ -425,7 +425,7 @@ public class TestManager implements CRUD<Test, Long> {
         QuestionManager questionManager = QuestionManager.getInstance();
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             testDao.update(con,newTestBean.getTest());
             questionManager.questionBeansUpdate(con,newTestBean.getQuestionBeans(),newTestBean.getTest().getId());
             DAOFactory.commitAndClose(con);
@@ -450,7 +450,7 @@ public class TestManager implements CRUD<Test, Long> {
         Map<Test,Double> tests = new HashMap<>();
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
+            con = DAOFactory.getInstance().getConnection();
             List<UserTest> userTests = userTestDao.getAllTestByUser(con,id);
             Test test;
             for (UserTest userTest : userTests) {

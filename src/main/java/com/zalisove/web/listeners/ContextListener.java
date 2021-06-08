@@ -31,7 +31,7 @@ public class ContextListener implements ServletContextListener {
         LOG.info("Initialize context listener");
         try {
             DAOFactory.setDaoFactoryFCN(MysqlDAOFactory.class.getName());
-            Connection connection = DAOFactory.getConnection();
+            Connection connection = DAOFactory.getInstance().getConnection();
             if (connection == null){
                 LOG.info("connection equals null");
                 throw new RuntimeException();

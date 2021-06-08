@@ -1,7 +1,6 @@
 package com.zalisove.db.managers;
 
 import com.zalisove.db.dao.DAOFactory;
-import com.zalisove.db.dao.dao_interfases.UserDao;
 import com.zalisove.db.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,11 +22,9 @@ public class UserManager implements CRUD<User,Long> {
 
 
     private static UserManager instance;
-    private UserDao userDao;
 
-    private UserManager() {
-        userDao = DAOFactory.getInstance().getUserDao();
-    }
+
+    private UserManager() { }
 
     public static UserManager getInstance() {
         if (instance == null) {
@@ -47,8 +44,8 @@ public class UserManager implements CRUD<User,Long> {
     public void create(User entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            userDao.create(con, entity);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getUserDao().create(con, entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -69,8 +66,8 @@ public class UserManager implements CRUD<User,Long> {
         Optional<User> entity;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            entity = userDao.read(con, primaryKey);
+            con = DAOFactory.getInstance().getConnection();
+            entity = DAOFactory.getInstance().getUserDao().read(con, primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -90,8 +87,8 @@ public class UserManager implements CRUD<User,Long> {
     public void update(User entity) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            userDao.update(con, entity);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getUserDao().update(con, entity);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -110,8 +107,8 @@ public class UserManager implements CRUD<User,Long> {
     public void delete(Long primaryKey) throws ManagerException {
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            userDao.delete(con, primaryKey);
+            con = DAOFactory.getInstance().getConnection();
+            DAOFactory.getInstance().getUserDao().delete(con, primaryKey);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -131,8 +128,8 @@ public class UserManager implements CRUD<User,Long> {
         Optional<User> entity;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            entity = userDao.searchUserByEmailAndPassword(con, email,password);
+            con = DAOFactory.getInstance().getConnection();
+            entity = DAOFactory.getInstance().getUserDao().searchUserByEmailAndPassword(con, email,password);
             DAOFactory.commitAndClose(con);
         } catch (SQLException throwables) {
             DAOFactory.rollbackAndClose(con);
@@ -152,8 +149,8 @@ public class UserManager implements CRUD<User,Long> {
         Connection con = null;
         long countRecords;
         try {
-            con = DAOFactory.getConnection();
-            countRecords = userDao.getCountRecords(con);
+            con = DAOFactory.getInstance().getConnection();
+            countRecords = DAOFactory.getInstance().getUserDao().getCountRecords(con);
             DAOFactory.commitAndClose(con);
             return countRecords;
         } catch (SQLException throwables) {
@@ -176,8 +173,8 @@ public class UserManager implements CRUD<User,Long> {
         List<User> users;
         Connection con = null;
         try {
-            con = DAOFactory.getConnection();
-            users = userDao.getUsers(con, quantity, from);
+            con = DAOFactory.getInstance().getConnection();
+            users = DAOFactory.getInstance().getUserDao().getUsers(con, quantity, from);
             DAOFactory.commitAndClose(con);
             return users;
         } catch (SQLException throwables) {
