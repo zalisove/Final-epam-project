@@ -135,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `final_project_bd`.`user_has_test` (
   `user_id` INT NOT NULL,
   `test_id` INT NOT NULL,
   `mark` DECIMAL(5,2) NOT NULL,
+  `writing_time` DATE NOT NULL,
   PRIMARY KEY (`user_id`, `test_id`),
   INDEX `fk_user_has_test_test1_idx` (`test_id` ASC) ,
   INDEX `fk_user_has_test_user1_idx` (`user_id` ASC) ,

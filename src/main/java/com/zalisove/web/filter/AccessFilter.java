@@ -67,6 +67,8 @@ public class AccessFilter implements Filter {
         adminCommands.add("delete_user");
         adminCommands.add("create_test_page");
         adminCommands.add("update_test_page");
+        adminCommands.add("get_top_users");
+        adminCommands.add("top_users_page");
 
 
 

@@ -51,6 +51,10 @@
                     <a class="nav-link" href="<c:url value='${Path.COMMAND___ADMIN_USER_PAGE}'/>"><fmt:message
                             key="header_jspf.user"/></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value='${Path.COMMAND__TOP_USER}'/>"><fmt:message
+                            key="header_jspf.top_users"/></a>
+                </li>
             </ul>
 
             </c:if>

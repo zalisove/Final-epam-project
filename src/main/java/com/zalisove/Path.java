@@ -19,6 +19,7 @@ public class Path {
 	public static final String PAGE__USER_PAGE= "WEB-INF/jsp/user_page.jsp";
 	public static final String PAGE__CHANGE_USER_PAGE= "WEB-INF/jsp/change_user_data.jsp";
 	public static final String PAGE__ADMIN_USERS= "WEB-INF/jsp/admin_users.jsp";
+	public static final String PAGE__TOP_USER= "WEB-INF/jsp/top_users.jsp";
 
 	// sort command
 	public static final String SORT_BY_NAME = "name";
@@ -49,6 +50,7 @@ public class Path {
 	public static final String COMMAND___USER_PAGE= "/controller?command=user_page";
 	public static final String COMMAND___CHANGE_USER_PAGE= "change_user_page";
 	public static final String COMMAND___ADMIN_USER_PAGE= "/controller?command=admin_users_page";
+	public static final String COMMAND__TOP_USER= "/controller?command=top_users_page";
 
 
 	public static final String COMMAND__LOGIN = "login";

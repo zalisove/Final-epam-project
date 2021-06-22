@@ -3,6 +3,7 @@ package com.zalisove.db.dao.dao_interfases;
 import com.zalisove.db.entity.UserTest;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
 import java.util.List;
@@ -70,4 +71,9 @@ public interface UserTestDao{
      * the currently running {@code Statement}
      */
     List<UserTest> getAllTestByUser(Connection con, long id) throws SQLException;
+
+
+
+    List<UserTest> getAllUserTestByDateFromTo(Connection con, Date from, Date to) throws SQLException;
 }
+

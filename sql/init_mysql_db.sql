@@ -91,8 +91,20 @@ insert into final_project_bd.user values(default,'client27@gmail.com','5BAA61E4C
 insert into final_project_bd.user values(default,'client28@gmail.com','5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8',null,null,2,default);
 
 -- insert user_has_test
-insert into final_project_bd.user_has_test values(1,1,99.5);
-insert into final_project_bd.user_has_test values(2,1,100.0);
+insert into final_project_bd.user_has_test values(9,1,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(9,2,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(9,3,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(9,4,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(3,1,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(3,2,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(3,3,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(3,4,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(4,1,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(4,2,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(4,3,100.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(4,4,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(5,1,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(6,2,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(7,3,10.0,'2011/02/25');
+insert into final_project_bd.user_has_test values(8,4,10.0,'2011/02/25');
 
-
--- SELECT * from  answer LIMIT 2 OFFSET 4

@@ -40,6 +40,7 @@ public final class Fields {
     public static final String USER_TEST__USER_ID = "user_id";
     public static final String USER_TEST__TEST_ID = "test_id";
     public static final String USER_TEST__MARK = "mark";
+    public static final String USER_TEST__WRITING_DATE = "writing_time";
 
 
 

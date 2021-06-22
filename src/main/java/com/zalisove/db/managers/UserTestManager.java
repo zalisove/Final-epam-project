@@ -6,7 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 
 /**
@@ -116,5 +118,20 @@ public class UserTestManager {
         }
     }
 
+
+    public List<UserTest> getAllUserTestByDateFromTo(Date from, Date to)throws ManagerException{
+        Connection con = null;
+        List<UserTest> userTest;
+        try {
+            con = DAOFactory.getInstance().getConnection();
+            userTest = DAOFactory.getInstance().getUserTestDao().getAllUserTestByDateFromTo(con,from,to);
+            DAOFactory.commitAndClose(con);
+        } catch (SQLException throwables) {
+            DAOFactory.rollbackAndClose(con);
+            LOG.error("no read user_test by date",throwables);
+            throw new ManagerException("no read user_test by date",throwables);
+        }
+        return userTest;
+    }
 
 }

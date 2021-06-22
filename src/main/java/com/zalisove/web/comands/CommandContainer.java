@@ -45,6 +45,8 @@ public class CommandContainer {
         commands.put("delete_user",new DeleteUserCommand());
         commands.put("update_user_data",new UpdateUserDataCommand());
         commands.put("set_locale",new SetLocaleCommand());
+        commands.put("get_top_users",new GetTopUsersCommand());
+        commands.put("top_users_page",new TopUserPageCommand());
 
 
         LOG.debug("Command container was successfully initialized");

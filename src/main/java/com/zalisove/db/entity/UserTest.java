@@ -1,5 +1,6 @@
 package com.zalisove.db.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 /**
  * UserTest entity
@@ -9,6 +10,7 @@ public class UserTest {
     private long userId;
     private long testId;
     private double mark;
+    private Date writingDate;
 
     public long getUserId() {
         return userId;
@@ -34,6 +36,13 @@ public class UserTest {
         this.mark = mark;
     }
 
+    public Date getWritingDate() {
+        return writingDate;
+    }
+
+    public void setWritingDate(Date writingDate) {
+        this.writingDate = writingDate;
+    }
 
     @Override
     public String toString() {
@@ -41,6 +50,7 @@ public class UserTest {
                 "userId=" + userId +
                 ", testId=" + testId +
                 ", mark=" + mark +
+                ", writingDate=" + writingDate +
                 '}';
     }
 
@@ -49,11 +59,11 @@ public class UserTest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTest userTest = (UserTest) o;
-        return userId == userTest.userId && testId == userTest.testId && Double.compare(userTest.mark, mark) == 0;
+        return userId == userTest.userId && testId == userTest.testId && Double.compare(userTest.mark, mark) == 0 && Objects.equals(writingDate, userTest.writingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, testId, mark);
+        return Objects.hash(userId, testId, mark, writingDate);
     }
 }
